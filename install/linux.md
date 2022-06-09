@@ -47,33 +47,3 @@ There are several solutions to run Wiki.js as a background service. We'll focus 
   [Unit]
   Description=Wiki.js
   After=network.target
-
-  [Service]
-  Type=simple
-  ExecStart=/usr/bin/node server
-  Restart=always
-  # Consider creating a dedicated user for Wiki.js here:
-  User=nobody
-  Environment=NODE_ENV=production
-  WorkingDirectory=/var/wiki
-
-  [Install]
-  WantedBy=multi-user.target
-  ```
-3. Save the service file (<kbd>CTRL</kbd>+<kbd>X</kbd>, followed by <kbd>Y</kbd>).
-4. Reload systemd:
-  ```bash
-  systemctl daemon-reload
-  ```
-5. Run the service:
-  ```bash
-  systemctl start wiki
-  ```
-6. Enable the service on system boot.
-  ```bash
-  systemctl enable wiki
-  ```
-
-*Note:* You can see the logs of the service using `journalctl -u wiki`
-
-![](https://a.icons8.com/TqgWTTfw/Oy7xHF/svg.svg){.align-abstopright}

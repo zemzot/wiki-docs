@@ -46,21 +46,3 @@ rsync -P wikibackup.dump root@YOUR-NEW-SERVER-IP:~/wikibackup.dump
 We're now ready to restore the database dump into the new database.
 
 On the new server, stop the `wiki` docker container:
-
-```bash
-docker stop wiki
-```
-
-Restore the `wikibackup.dump` file into a new database, first dropping the existing empty DB:
-```bash
-docker exec -it db dropdb -U wiki wiki
-docker exec -it db createdb -U wiki wiki
-cat ~/wikibackup.dump | docker exec -i db pg_restore -U wiki -d wiki
-```
-
-We can now restart the `wiki` container:
-```
-docker start wiki
-```
-
-That's it!
